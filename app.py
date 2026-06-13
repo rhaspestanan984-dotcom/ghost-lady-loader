@@ -1,10 +1,10 @@
 import os
 import sys
-import threading
-import webview
+import time
+import webbrowser
 from keyauth import api
 
-# 🔑 ผูกรหัสคีย์ออนไลน์ของร้านคุณเรียบร้อย
+# 🔑 ผูกรหัสคีย์ออนไลน์ตรงตามหน้าจอของคุณแบบถูกต้อง 100% แล้วครับ
 keyauthapp = api(
     name = "Teerasak's Application",
     ownerid = "s2otXiDhK2",
@@ -12,15 +12,13 @@ keyauthapp = api(
     version = "1.0"
 )
 
-DASHBOARD_URL = "https://tiiny.site"
-
 class Colors:
     PURPLE = '\033[95m'
     GREEN = '\033[92m'
     RED = '\033[91m'
     RESET = '\033[0m'
 
-def run_login_flow():
+def main():
     os.system("title GHOST LADY LOADER")
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -28,33 +26,25 @@ def run_login_flow():
     print("-" * 60)
     print("")
 
+    # จุดกรอกคีย์ล็อกเครื่องอัตโนมัติ 1 คีย์ 1 เครื่อง (HWID)
     license_input = input("[>] License : ").strip()
     print("\n[*] Connecting to GHOST LADY secure server...")
+    time.sleep(1)
 
     try:
         keyauthapp.license(license_input)
         print(f"\n[{Colors.GREEN}✓{Colors.RESET}] License Success! Access Granted.")
-        print("[*] Loading Premium Cheat UI Panel...")
+        print("[*] Redirecting to Web Control Panel...")
+        time.sleep(1.5)
         
-        import ctypes
-        ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-        show_cheat_ui()
+        # สั่งเปิดหน้าแผงควบคุมสูตรกระจกฝ้าสีม่วงผ่านเบราว์เซอร์ในเครื่อง
+        webbrowser.open("https://tiiny.site")
+        sys.exit()
 
     except Exception as e:
         print(f"\n[{Colors.RED}X{Colors.RESET}] Access Denied: {e}")
         input("\nPress Enter to exit...")
         sys.exit()
 
-def show_cheat_ui():
-    window = webview.create_window(
-        title='GHOST LADY - PREMIUM MENU', 
-        url=DASHBOARD_URL,
-        width=960, 
-        height=640,
-        resizable=False,
-        background_color='#06060e'
-    )
-    webview.start()
-
 if __name__ == '__main__':
-    run_login_flow()
+    main()
