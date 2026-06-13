@@ -11,10 +11,10 @@ jobs:
         python-version: '3.11'
     - name: Install Tools
       run: |
-        pip install pyinstaller pywebview keyauth
+        pip install pyinstaller keyauth
     - name: Build EXE
       run: |
-        pyinstaller --onefile --hidden-import=webview app.py
+        pyinstaller --onefile app.py
     - name: Upload Result
       uses: actions/upload-artifact@v3
       with:
